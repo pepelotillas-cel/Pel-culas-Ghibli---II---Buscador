@@ -23,9 +23,6 @@ fetch(url)
         });
     })
     .catch(error => console.log(error));
-
-
-// BUSCADOR NUEVO
 document.getElementById("buscador").addEventListener("input", function() {
     const texto = this.value.toLowerCase();
     const contenedor = document.getElementById("contenedor");
