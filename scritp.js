@@ -1,48 +1,50 @@
-const url = "https://ghibliapi.vercel.app/films";
+const botonSi = document.getElementById("si");
+const botonNo = document.getElementById("no");
 
-let peliculas = [];
+const contenido = document.getElementById("contenido");
+const pantallaFinal = document.getElementById("final");
 
-fetch(url)
-    .then(respuesta => respuesta.json())
-    .then(data => {
-        peliculas = data;
+let intentos = 0;
 
-        const contenedor = document.getElementById("contenedor");
-        data.forEach(pelicula => {
-            contenedor.innerHTML += `
-                <div class="card">
-                    <img src="${pelicula.image}" alt="${pelicula.title}">
-                    <div class="card-body">
-                        <div class="card-title">${pelicula.title}</div>
-                        <p><strong>Director:</strong> ${pelicula.director}</p>
-                        <p><strong>Año:</strong> ${pelicula.release_date}</p>
-                        <p><strong>Puntuación:</strong> ${pelicula.rt_score}</p>
-                    </div>
-                </div>
-            `;
-        });
-    })
-    .catch(error => console.log(error));
-document.getElementById("buscador").addEventListener("input", function() {
-    const texto = this.value.toLowerCase();
-    const contenedor = document.getElementById("contenedor");
-    contenedor.innerHTML = "";
+botonNo.addEventListener("click", function() {
 
-    const filtradas = peliculas.filter(pelicula =>
-        pelicula.title.toLowerCase().includes(texto)
-    );
+    intentos++;
 
-    filtradas.forEach(pelicula => {
-        contenedor.innerHTML += `
-            <div class="card">
-                <img src="${pelicula.image}" alt="${pelicula.title}">
-                <div class="card-body">
-                    <div class="card-title">${pelicula.title}</div>
-                    <p><strong>Director:</strong> ${pelicula.director}</p>
-                    <p><strong>Año:</strong> ${pelicula.release_date}</p>
-                    <p><strong>Puntuación:</strong> ${pelicula.rt_score}</p>
-                </div>
-            </div>
-        `;
-    });
+    // Hacer que el botón pueda moverse libremente
+    botonNo.style.position = "fixed";
+
+    // Obtener el tamaño del botón
+    const ancho = botonNo.offsetWidth;
+    const alto = botonNo.offsetHeight;
+
+    // Crear una posición aleatoria
+    const x = Math.random() * (window.innerWidth - ancho);
+    const y = Math.random() * (window.innerHeight - alto);
+
+    // Aplicar la nueva posición
+    botonNo.style.left = x + "px";
+    botonNo.style.top = y + "px";
+
+    // Hacer pequeño el botón No
+    let tamañoNo = 1 - (intentos * 0.15);
+
+    if (tamañoNo < 0.2) {
+        tamañoNo = 0.2;
+    }
+
+    botonNo.style.transform = "scale(" + tamañoNo + ")";
+
+    // Hacer grande el botón Sí
+    const tamañoSi = 1 + (intentos * 0.1);
+
+    botonSi.style.transform = "scale(" + tamañoSi + ")";
+});
+
+
+botonSi.addEventListener("click", function() {
+
+    contenido.style.display = "none";
+
+    pantallaFinal.style.display = "block";
+
 });
