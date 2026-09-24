@@ -1,47 +1,110 @@
-body {
-    background: linear-gradient(to right, #e0eafc, #cfdef3);
-    font-family: Arial, sans-serif;
-    text-align: center;
-}
-h1 {
-    margin: 20px;
-    color: #333;
-}
-#contenedor {
+.botones {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
 }
-.card {
-    width: 300px;
-    margin: 15px;
-    border-radius: 15px;
+
+/* ESTILO GENERAL */
+button {
+    position: relative;
+    border: none;
+    padding: 17px 42px;
+    border-radius: 18px;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    transition: all 0.3s ease;
     overflow: hidden;
-    background-color: white;
-    transition: 0.3s;
 }
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 10px 20px rgba(0,0,0,0.2);
+
+/* BOTÓN SÍ */
+#si {
+    color: white;
+    background: linear-gradient(
+        135deg,
+        #9b5c38,
+        #6f3825,
+        #4a2118
+    );
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.35),
+        inset 0 1px 1px rgba(255, 255, 255, 0.35);
 }
-.card img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
+
+/* BRILLO DEL SÍ */
+#si::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.35),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+    transition: 0.6s;
 }
-.card-body {
-    padding: 15px;
+
+#si:hover::before {
+    left: 130%;
 }
-.card-title {
-    font-size: 18px;
-    font-weight: bold;
+
+#si:hover {
+    transform: translateY(-4px) scale(1.05);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.45),
+        0 0 20px rgba(150, 80, 50, 0.4);
 }
-.card p {
-    margin: 5px 0;
+
+
+/* BOTÓN NO */
+#no {
+    color: white;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.25);
 }
-#buscador {
-    max-width: 500px;
-    margin: 20px auto;
-    border-radius: 10px;
-    padding: 10px;
+
+#no:hover {
+    transform: translateY(-3px);
+
+    background: rgba(255, 255, 255, 0.2);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.4);
+}
+#final {
+    display: none;
+    position: fixed;
+    inset: 0;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+#final h1 {
+    color: white;
+    font-size: 80px;
+    text-shadow: 0 4px 20px black;
 }
